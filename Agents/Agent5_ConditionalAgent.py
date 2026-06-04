@@ -9,34 +9,42 @@ class ConditionalState(TypedDict):
     final : str
 
 def nameNode(state: ConditionalState) -> ConditionalState:
+    '''Initial node to add the name to the state.'''
     state["final"] = f'Hi {state["name"]}, Welcome to the community !!.'
     return state
 
 def childNode(state: ConditionalState) -> ConditionalState:
+    """Node for child users, adds a message about exploring the kids learning section."""
     state["final"] += f' You are a child, you can explore the kids learning section.'
     return state
 
 def adultNode(state: ConditionalState) -> ConditionalState:
+    """Node for adult users, adds a message about joining community meetings."""
     state["final"] += f' You are an adult, you can join the community meetings. '
     return state
 
 def deciderNode(state: ConditionalState):
+    """Decider node to determine if the user is a child or an adult based on their age."""
     if state["age"] < 18 : return "childNode"
     else : return "adultNode"
 
 def skillNode(state : ConditionalState) -> ConditionalState:
+    """"Node to add the user's skill to the state."""
     state["final"] += f'Your skill is {state["skill"]}.'
     return state
 
 def internNode(state: ConditionalState) -> ConditionalState:
+    """Node for intern users, adds a message about exploring role-specific resources."""
     state["final"] += f'Your role is {state["role"]}. You can explore your role specific resources.'
     return state
 
 def FteNode(state: ConditionalState) -> ConditionalState:
+    """Node for FTE users, adds a message about exploring all resources and community features."""
     state["final"] += f'Your role is {state["role"]}. You can explore all the resources and community features.'
     return state
 
 def role_deciderNode(state : ConditionalState): 
+    """Decider node to determine if the user is an intern or a full-time employee based on their role."""
     if state["role"] == "intern" : return "internNode"
     else : return "FteNode"
 
