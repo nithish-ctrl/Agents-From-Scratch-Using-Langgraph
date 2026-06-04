@@ -10,6 +10,7 @@ class HighLowState(TypedDict):
     feedback : str
     counter : int 
     all_guesses : List[int]
+    max_tries : int
 
 def guessNode(state : HighLowState) -> HighLowState:
     """Simple function to guess a number between Low and high."""
@@ -37,7 +38,7 @@ def continue_node(state:HighLowState) -> str:
     if state["feedback"] == "correct":
         print(f'Guessed the number {state["number"]} in {state["counter"]} attempts!!')
         return "exit"
-    elif state["counter"] >= 7:
+    elif state["counter"] >= state["max_tries"]:
         print(f'Failed to guess the number {state["number"]} in 7 attempts!!')
         return "exit"
     else : 
@@ -61,6 +62,6 @@ graph.add_conditional_edges(
 )
 
 app = graph.compile()
-initial_state = HighLowState(Low=1, High=100, guess=0, number=42, feedback="", counter=0, all_guesses=[])
+initial_state = HighLowState(Low=1, High=100, guess=0, number=42, feedback="", counter=0, max_tries = 10, all_guesses=[])
 result = app.invoke(initial_state)
 print(result["all_guesses"])
