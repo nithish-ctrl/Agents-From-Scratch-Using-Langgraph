@@ -1,51 +1,12 @@
 from typing import TypedDict, List, Any
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage # Didn't use beacuse didnt need a type to tell inside list
 from langgraph.graph import StateGraph, START, END
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_community.chat_models import ChatLlamaCpp
+from langchain_core.output_parsers import StrOutputParser # Didnt use because the format is right
+from model import load_model 
+from prompt_template import prompt_template
 
-model_path = r"c:\Users\Nithish\Downloads\qwen2.5-3b-instruct-q5_0.gguf"
-llm = ChatLlamaCpp(
-    model_path = model_path,
-    temperature = 0.1,
-    streaming = False, 
-    max_tokens = 128,
-    n_ctx = 2048,
-    n_batch = 512,
-    top_p = 0.9,
-    model_kwargs={
-        "device" : "cuda",
-        "chat_format" : "chatml",
-        "flash_attn" : True
-    },
-    verbose=False
-)
-
-prompt_template = ChatPromptTemplate.from_messages(
-    [
-    (
-        "system",
-    """
-        You are a highly intelligent and helpful AI assistant.
-        Use the relevant memories below to answer questions about the user.
-        Relevant memories from past conversations: 
-
-                Guidelines:
-                - Answer clearly and naturally.
-                - Remember details from previous conversation.
-                - Keep responses concise unless asked otherwise.
-                - Do not invent fake conversations.
-                - Do not generate 'Human:' or 'Assistant:' labels.
-                - If the user's name or details were mentioned earlier, remember them.
-                - Stay consistent with previous context.
-                - Do not say you lack access to previous messages unless history is actually unavailable.
-                - If you do not know something, say so honestly.
-                - Always be helpful and polite.
-    """
-    )
-    ]
-)
+llm = load_model()
+prompt_template = prompt_template
 
 class ChatbotState(TypedDict):
     prompt : str
