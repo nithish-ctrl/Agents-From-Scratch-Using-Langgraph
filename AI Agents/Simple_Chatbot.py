@@ -3,7 +3,7 @@ from langchain_core.messages import HumanMessage # Didn't use beacuse didnt need
 from langgraph.graph import StateGraph, START, END
 from langchain_core.output_parsers import StrOutputParser # Didnt use because the format is right
 from model import load_model 
-from prompt_template import prompt_template
+from Prompt_template import prompt_template
 
 llm = load_model()
 prompt_template = prompt_template
