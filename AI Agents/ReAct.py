@@ -16,7 +16,11 @@ def Add(a:int, b:int):
     """This is an additon function that adds up 2 numbers"""
     return a+b
 
-tools = [Add]
+def Subtract(a:int, b:int):
+    """This is an subtraction function that subtracts two numbers"""
+    return a-b
+
+tools = [Add, Subtract]
 llm_with_tools = llm.bind_tools(tools)
 
 def model_def(state : AgentState) -> AgentState: 
@@ -63,5 +67,5 @@ def print_stream(stream):
             message.pretty_print()
 
 
-inputs = {"messages": [("user", "Add 40 + 16 and then add 50 to their result. Also tell me a joke.")]}
+inputs = {"messages": [("user", "Add 40 + 16 and then add 50 to their result and then subtract 6 from its result. Also tell me a joke.")]}
 print_stream(app.stream(inputs, stream_mode="values")) # type: ignore
