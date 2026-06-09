@@ -12,9 +12,11 @@ def load_model() :
         top_p = 0.9,
         model_kwargs={
             "device" : "cuda",
-            "chat_format" : "chatml",
+            "chat_format" : "chatml-function-calling",
             "flash_attn" : True
         },
         verbose=False
     )
     return llm
+
+
