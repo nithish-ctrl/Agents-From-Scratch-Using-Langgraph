@@ -6,8 +6,8 @@ def load_model() :
         model_path = model_path,
         temperature = 0.1,
         streaming = False, 
-        max_tokens = 128,
-        n_ctx = 2048,
+        max_tokens = 512,
+        n_ctx = 4096,
         n_batch = 512,
         top_p = 0.9,
         model_kwargs={
