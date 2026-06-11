@@ -95,8 +95,8 @@ def should_continue(state : DrafterState) -> str:
     for message in reversed(messages):
         # ... and checks if this is a ToolMessage resulting from save
         if (isinstance(message, ToolMessage) and 
-            "saved" in message.content.lower() and
-            "document" in message.content.lower()):
+            "saved" in message.content.lower() and # type: ignore
+            "document" in message.content.lower()):  # type: ignore
             return "end" # goes to the end edge which leads to the endpoint
         
     return "continue"
@@ -133,7 +133,7 @@ app = graph.compile()
 def run_agent():
     print("--Start of Drafting--")
     state = {"messages" : []}
-    for step in app.stream(state, stream_mode="values"):
+    for step in app.stream(state, stream_mode="values"):   # type: ignore
         if "message" in step : 
             print_messages(step["message"])
     print("--End of the Drafter--")
