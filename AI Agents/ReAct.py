@@ -16,6 +16,7 @@ def Add(a:int, b:int):
     """This is an additon function that adds up 2 numbers"""
     return a+b
 
+@tool
 def Subtract(a:int, b:int):
     """This is an subtraction function that subtracts two numbers"""
     return a-b
