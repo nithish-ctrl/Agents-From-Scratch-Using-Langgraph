@@ -51,8 +51,8 @@ def save(filename : str) -> str:
     except Exception as e : 
         return f"Saving failed due to {e}"
     
-tools = [update, save]
-llm = llm.bind_tools(tools=tools)
+tools_available = [update, save]
+llm = llm.bind_tools(tools=tools_available)
 
 def process_Agent(state : DrafterState) -> DrafterState:
     """"""
@@ -113,7 +113,7 @@ def print_messages(messages):
 graph = StateGraph(DrafterState)
 graph.add_node("Process_Agent",process_Agent)
 
-Tool_node = ToolNode(tools=tools)
+Tool_node = ToolNode(tools=tools_available)
 graph.add_node("tool_node", Tool_node)
 
 graph.add_edge(START, "Process_Agent")
