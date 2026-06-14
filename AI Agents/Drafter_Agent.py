@@ -16,7 +16,7 @@ class DrafterState(TypedDict):
 
 @tool
 def update(content : str) -> str:
-    """Replace the entire document with updated content.
+    """Replace the entire global variable document with made content.
 
     Use this whenever the user asks to:
     - create a document
@@ -33,7 +33,7 @@ def update(content : str) -> str:
     return f"Document updated successfully. The current document is {document}"
 
 @tool
-def save(filename : str) -> str:
+def save(filename : str = "filename.txt") -> str:
     """
     This is tool to save the document in the specified filename as a text file. 
 
