@@ -39,7 +39,7 @@ def continue_node(state:HighLowState) -> str:
         print(f'Guessed the number {state["number"]} in {state["counter"]} attempts!!')
         return "exit"
     elif state["counter"] >= state["max_tries"]:
-        print(f'Failed to guess the number {state["number"]} in 7 attempts!!')
+        print(f'Failed to guess the number {state["number"]} in {state["max_tries"]} attempts!!')
         return "exit"
     else : 
         return "StartAgain"
